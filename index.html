@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armestar & Abogados S.A.C.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background-image: url('img/hero.jpg'); /* Azul oscuro con texto dorado */
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            border-bottom: 3px solid #ca8a04; /* Dorado */
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px -4px rgba(0,0,0,0.15), 0 5px 8px -3px rgba(0,0,0,0.1);
+        }
+        nav a {
+            transition: color 0.3s ease;
+            position: relative; /* Para la línea inferior animada */
+        }
+        nav a::after { /* Línea inferior animada para enlaces de navegación */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #ca8a04;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        nav a:hover {
+            color: #ca8a04;
+        }
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.65rem; /* Ligeramente ajustado */
+            color: #1e293b;
+        }
+        .logo-ampersand {
+            color: #ca8a04;
+            font-size: 1.4rem;
+            margin: 0 0.15rem;
+        }
+        .btn { /* Clase base para botones */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* Esquinas más redondeadas */
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #ca8a04; /* Dorado */
+            color: white;
+            box-shadow: 0 4px 6px rgba(202, 138, 4, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: #a16207; /* Dorado más oscuro */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(161, 98, 7, 0.3);
+        }
+        .btn-secondary {
+            background-color: #334155; /* Azul pizarra oscuro */
+            color: white;
+            box-shadow: 0 4px 6px rgba(51, 65, 85, 0.2);
+        }
+        .btn-secondary:hover {
+            background-color: #1e293b; /* Azul pizarra más oscuro */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(30, 41, 59, 0.3);
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards; /* 'forwards' mantiene el estado final */
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Estilo para ícono placeholder en tarjetas de áreas */
+        .practice-icon-placeholder {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #ca8a04; /* Dorado */
+            border-radius: 50%;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+        .team-member-img {
+            width: 120px; /* Tamaño de imagen de abogado */
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover; /* Asegura que la imagen cubra el espacio */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem;
+            border: 4px solid #ca8a04; /* Borde dorado */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-700">
+
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="#" class="logo-text">
+                Armestar <span class="logo-ampersand">&</span> Abogados
+            </a>
+            <div class="hidden md:flex space-x-6 text-sm">
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#areas">Áreas de Práctica</a>
+                <a href="#equipo">Equipo</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-600 hover:text-yellow-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-md">
+            <a href="#inicio" class="block py-2 px-4 text-sm text-slate-700 hover:bg-yellow-50 hover:text-yellow-600">Inicio</a>
+            <a href="#nosotros" class="block py-2 px-4 text-sm text-slate-700 hover:bg-yellow-50 hover:text-yellow-600">Nosotros</a>
+            <a href="#areas" class="block py-2 px-4 text-sm text-slate-700 hover:bg-yellow-50 hover:text-yellow-600">Áreas de Práctica</a>
+            <a href="#equipo" class="block py-2 px-4 text-sm text-slate-700 hover:bg-yellow-50 hover:text-yellow-600">Equipo</a>
+            <a href="#contacto" class="block py-2 px-4 text-sm text-slate-700 hover:bg-yellow-50 hover:text-yellow-600">Contacto</a>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero-bg text-white min-h-[calc(100vh-60px)] flex items-center justify-center py-10">
+        <div class="bg-black bg-opacity-60 p-8 sm:p-12 md:p-16 rounded-xl text-center max-w-3xl mx-auto fade-in-up shadow-2xl">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">Armestar & Abogados S.A.C.</h1>
+            <p class="text-lg sm:text-xl mb-10">Asesoría jurídica integral y especializada. Comprometidos con la excelencia y la protección de sus intereses en el norte del Perú.</p>
+            <a href="#contacto" class="btn btn-primary text-lg">Contáctenos Ahora</a>
+        </div>
+    </section>
+
+    <section id="nosotros" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 section-title">Acerca de Nosotros</h2>
+            <p class="text-center text-slate-600 mb-12 md:mb-16 max-w-3xl mx-auto leading-relaxed">
+                ARMESTAR & ABOGADOS S.A.C., es una firma peruana que, desde el año 2017, brinda asesoría jurídica integral a sus clientes en todas las materias legales que estos requieran. Somos especialistas en materia civil y comercial, así como en derecho inmobiliario y derecho laboral privado. Nuestra experiencia y el reconocimiento de nuestros clientes avalan el trabajo que realizamos.
+            </p>
+            <div class="grid md:grid-cols-2 gap-10 md:gap-12 items-start mb-12 md:mb-16">
+                <div class="fade-in-up p-6 bg-slate-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-600">Misión</h3>
+                    <p class="text-slate-600 leading-relaxed">Somos un Estudio Jurídico especializado en todos los ámbitos del Derecho Civil y Comercial, asimismo ofrecemos un servicio diferenciado e integral de asesoría y consultoría en Derecho Inmobiliario y Derecho Laboral Privado, con eficacia comprobada y garantizando la plena satisfacción de nuestros clientes.</p>
+                </div>
+                <div class="fade-in-up p-6 bg-slate-50 rounded-lg shadow-md" style="animation-delay: 0.1s;">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-600">Visión</h3>
+                    <p class="text-slate-600 leading-relaxed">Ser el estudio líder en la zona norte del país, con profesionales altamente calificados, inculcando en los clientes la importancia de la asesoría legal preventiva a fin de proteger sus intereses.</p>
+                </div>
+            </div>
+            <div class="fade-in-up" style="animation-delay: 0.2s;">
+                <h3 class="text-2xl md:text-3xl font-semibold text-center mb-10 text-slate-700">Nuestros Valores Fundamentales</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-yellow-500">
+                        <h4 class="font-semibold text-lg text-slate-700">Atención Personalizada</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-yellow-500">
+                        <h4 class="font-semibold text-lg text-slate-700">Credibilidad</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-yellow-500">
+                        <h4 class="font-semibold text-lg text-slate-700">Confidencialidad</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-yellow-500">
+                        <h4 class="font-semibold text-lg text-slate-700">Ética Laboral</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover border-t-4 border-yellow-500">
+                        <h4 class="font-semibold text-lg text-slate-700">Efectividad</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="py-16 md:py-24 bg-slate-100">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 section-title">Áreas de Práctica</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-xl card-hover flex flex-col items-center text-center fade-in-up">
+                    <div class="practice-icon-placeholder">⚖️</div>
+                    <h3 class="text-xl font-semibold my-3 text-yellow-600">Derecho Civil</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Asesoría en normas, litigios, derechos reales, contratos, responsabilidad civil y familia.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl card-hover flex flex-col items-center text-center fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="practice-icon-placeholder">🛡️</div>
+                    <h3 class="text-xl font-semibold my-3 text-yellow-600">Derecho Penal y Procesal Penal</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Defensa en ilícitos, corrupción, delitos sexuales, lavado de activos y crimen organizado.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl card-hover flex flex-col items-center text-center fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="practice-icon-placeholder">📈</div>
+                    <h3 class="text-xl font-semibold my-3 text-yellow-600">Societario y Corporativo</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Consultoría, reorganización, estatutos, y M&A.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl card-hover flex flex-col items-center text-center fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="practice-icon-placeholder">🏠</div>
+                    <h3 class="text-xl font-semibold my-3 text-yellow-600">Registral e Inmobiliario</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Proyectos inmobiliarios, títulos, rectificación de áreas, y compraventa.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl card-hover flex flex-col items-center text-center fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="practice-icon-placeholder">👨‍💼</div>
+                    <h3 class="text-xl font-semibold my-3 text-yellow-600">Derecho Laboral Privado</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Contratación, planillas, fiscalización, y políticas de SST.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-xl card-hover flex flex-col items-center justify-center text-center fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="practice-icon-placeholder">➕</div>
+                    <h3 class="text-xl font-semibold my-3 text-yellow-600">Y más...</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Contáctenos para conocer todas nuestras especialidades y cómo podemos ayudarle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 section-title">Nuestro Equipo de Expertos</h2>
+            <p class="text-center text-slate-600 mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed">Contamos con profesionales altamente calificados y especializados en cada área, comprometidos con brindar un servicio serio, responsable y de la más alta calidad.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500">
+                    <img src="img/abogado_cristian.jpg" alt="Foto de Cristian Armestar Espinoza" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Cristian Armestar Espinoza</h3>
+                    <p class="text-yellow-600 font-medium">Abogado Principal</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad Nacional de Piura, maestría en derecho civil y comercial. Experiencia en notaría, Corte Superior y asesoría municipal.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500" style="animation-delay: 0.05s;">
+                    <img src="img/abogado_claudia.jpg" alt="Foto de Claudia Bobadilla Yovera" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Claudia Bobadilla Yovera</h3>
+                    <p class="text-yellow-600 font-medium">Abogada</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad Nacional de Piura, maestría en civil y comercial. Experiencia judicial y diploma internacional en derecho corporativo (ESAN).</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500" style="animation-delay: 0.1s;">
+                    <img src="img/abogado_ruben.jpg" alt="Foto de Ruben Atoche Guevara" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Ruben Atoche Guevara</h3>
+                    <p class="text-yellow-600 font-medium">Abogado</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad Nacional de Piura. Más de 5 años de experiencia en procesos penales, administrativos y constitucionales. Asesor de empresas.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500" style="animation-delay: 0.15s;">
+                    <img src="img/abogado_stalin.jpg" alt="Foto de Stalin Tuesta Huaman" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Stalin Tuesta Huaman</h3>
+                    <p class="text-yellow-600 font-medium">Abogado</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad Nacional de Piura. Más de 7 años en procesos penales. Ex fiscal adjunto y asesor jurídico en entidades públicas.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500" style="animation-delay: 0.2s;">
+                    <img src="img/abogado_eder.jpg" alt="Foto de Eder Santiago Baca" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Eder Santiago Baca</h3>
+                    <p class="text-yellow-600 font-medium">Abogado</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad Nacional de Piura, pasantía en PUCP. Especialista en procesal civil, administrativo, constitucional y arbitraje. Publicaciones jurídicas.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500" style="animation-delay: 0.25s;">
+                    <img src="img/abogado_anthony.jpg" alt="Foto de Anthony Chiroque Solano" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Anthony Chiroque Solano</h3>
+                    <p class="text-yellow-600 font-medium">Abogado</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad Nacional de Piura. Más de 6 años en procesos laborales, disciplinarios y constitucionales. Experiencia en Cortes Superiores.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl shadow-lg text-center card-hover fade-in-up border-b-4 border-yellow-500" style="animation-delay: 0.3s;">
+                    <img src="img/abogado_marioffy.jpg" alt="Foto de Marioffy Cruz Lama" class="team-member-img">
+                    <h3 class="text-xl font-semibold text-slate-800">Marioffy Cruz Lama</h3>
+                    <p class="text-yellow-600 font-medium">Bachiller en Derecho</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Universidad de Piura. Asistente legal con experiencia en proyección de escritos y gestión procesal en diversas áreas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-16 md:py-24 bg-slate-800 text-slate-200">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 section-title !border-yellow-500 text-white">Póngase en Contacto</h2>
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+                <div class="fade-in-up bg-slate-700 p-6 sm:p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Envíenos un Mensaje Directo</h3>
+                    <form action="#" method="POST" class="space-y-5">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Nombre Completo</label>
+                            <input type="text" name="name" id="name" required placeholder="Su Nombre Aquí" class="mt-1 block w-full px-4 py-2.5 bg-slate-600 border border-slate-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm text-white placeholder-slate-400">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico</label>
+                            <input type="email" name="email" id="email" required placeholder="suemail@ejemplo.com" class="mt-1 block w-full px-4 py-2.5 bg-slate-600 border border-slate-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm text-white placeholder-slate-400">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-slate-300 mb-1">Teléfono (Opcional)</label>
+                            <input type="tel" name="phone" id="phone" placeholder="Su Número de Teléfono" class="mt-1 block w-full px-4 py-2.5 bg-slate-600 border border-slate-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm text-white placeholder-slate-400">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-300 mb-1">Su Consulta</label>
+                            <textarea name="message" id="message" rows="5" required placeholder="Escriba su mensaje aquí..." class="mt-1 block w-full px-4 py-2.5 bg-slate-600 border border-slate-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm text-white placeholder-slate-400"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full btn btn-primary py-3 text-base">
+                                Enviar Mensaje
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="fade-in-up space-y-6 bg-slate-700 p-6 sm:p-8 rounded-xl shadow-xl" style="animation-delay: 0.1s;">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Información de Contacto</h3>
+                        <p class="mb-3 leading-relaxed"><strong class="text-yellow-400">Dirección:</strong><br>CALLE TAMBOGRANDE MZ T Lote 16-B 2DO PISO, URBANIZACIÓN MONTERRICO - PIURA</p>
+                        <p class="mb-3"><strong class="text-yellow-400">Teléfono:</strong> <a href="tel:+51968838848" class="hover:underline text-white">968 838 848</a></p>
+                        <p class="mb-6"><strong class="text-yellow-400">Correo:</strong> <a href="mailto:armestarabogados@gmail.com" class="hover:underline text-white">armestarabogados@gmail.com</a></p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold mb-2 text-white">Horario de Atención</h4>
+                        <p class="mb-1">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                        <p>Sábados: 9:00 AM - 1:00 PM (Previa Cita)</p>
+                    </div>
+                    <div class="mt-6 h-64 sm:h-72 bg-slate-600 rounded-lg flex items-center justify-center text-slate-400 overflow-hidden">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.430470099075!2d-80.6469891852361!3d-5.042009996347795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904a441c9b0997c7%3A0x2a8a467a935f9f9c!2sCalle%20Tambogrande%20T%20Lote%2016-B%2C%20Piura!5e0!3m2!1ses-419!2spe!4v1684798890000!5m2!1ses-419!2spe" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa de ubicación de Armestar & Abogados">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="mb-4">
+                 <a href="#" class="text-xl font-semibold hover:text-yellow-400 transition-colors">Armestar <span class="text-yellow-500">&</span> Abogados</a>
+            </div>
+            <p class="text-sm mb-1">© <span id="currentYear"></span> Armestar & Abogados S.A.C. Todos los derechos reservados.</p>
+            <p class="text-xs">Calle Tambogrande Mz T Lote 16-B 2do Piso, Urb. Monterrico - Piura, Perú.</p>
+            <!-- <div class="mt-4 space-x-4">
+                <a href="#" class="hover:text-yellow-400">Facebook</a>
+                <a href="#" class="hover:text-yellow-400">LinkedIn</a>
+            </div> -->
+        </div>
+    </footer>
+
+    <script>
+        // Script para el año actual en el footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Script para el menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Cerrar menú móvil al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+        
+
+        // Script para el smooth scroll mejorado
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+
+                if (targetId === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                if (targetId.length > 1) { 
+                    e.preventDefault();
+                    try {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            // Considerar la altura del header fijo
+                            const headerOffset = document.querySelector('header')?.offsetHeight || 60;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            console.warn('Smooth scroll target not found:', targetId);
+                        }
+                    } catch (error) {
+                        console.error('Invalid selector for smooth scroll:', targetId, error);
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
