@@ -16,10 +16,13 @@
             scroll-behavior: smooth;
         }
         .hero-bg {
-            background-image: url('img/hero.jpg'); /* Azul oscuro con texto dorado */
-            background-size: cover;
-            background-position: center;
-        }
+		  background-image: url('img/hero.jpg');
+		  background-size: cover;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  aspect-ratio: 16/9; /* Esto ayuda a conservar proporciones en móviles */
+		}
+	
         .section-title {
             border-bottom: 3px solid #ca8a04; /* Dorado */
             padding-bottom: 8px;
